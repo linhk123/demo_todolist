@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
-$END$
+<div th:fragment="content">
+    <div class="mb-8">
+        <h2 class="text-4xl font-black text-gray-900">Lịch trình</h2>
+        <p class="text-gray-400 font-medium mt-1">Theo dõi thời hạn và kế hoạch công việc</p>
+    </div>
+
+    <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-100">
+        <div id='calendar-container' class="min-h-[600px]"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <style>
+        .fc { --fc-border-color: #f8fafc; --fc-today-bg-color: #f5f3ff; font-family: 'Lexend', sans-serif; }
+        .fc .fc-toolbar-title { font-weight: 800; color: #1e293b; font-size: 1.5rem !important; }
+        .fc .fc-button-primary { background-color: #4f46e5 !important; border: none !important; border-radius: 14px !important; padding: 10px 20px !important; font-weight: 700 !important; text-transform: capitalize !important; }
+        .fc .fc-button-primary:hover { background-color: #4338ca !important; }
+        .fc-daygrid-event { border-radius: 8px !important; padding: 4px 8px !important; border: none !important; }
+    </style>
+
+    <script th:inline="javascript">
+        // Đảm bảo chạy lại Calendar mỗi khi fragment được nạp
+        (function() {
+            const calendarEl = document.getElementById('calendar-container');
+            if (!calendarEl) return;
+
+            const tasks = [[${tasks}]] || [];
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek' },
+                events: tasks.map(t => ({
+                    title: t.title,
+                    start: t.dueDate,
+                    backgroundColor: '#E0E7FF',
+                    textColor: '#4338CA'
+                }))
+            });
+            calendar.render();
+        })();
+    </script>
+</div>
 </body>
 </html>

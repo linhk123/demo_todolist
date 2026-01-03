@@ -1,4 +1,4 @@
-package com.uc_modul4.dto; // Nên để ở package event
+package com.uc_modul4.event; // Nên để ở package event
 
 import com.uc_modul4.entity.Task;
 import lombok.Getter;

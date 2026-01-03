@@ -2,6 +2,8 @@ package com.uc_modul4.repository;
 
 import com.uc_modul4.entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -12,4 +14,10 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
 
     // Tìm kiếm dự án theo tên
     List<Project> findByNameContainingIgnoreCase(String name);
+    @Query("""
+        SELECT p FROM Project p
+        JOIN p.members m
+        WHERE m.id = :userId
+    """)
+    List<Project> findProjectsByUserId(@Param("userId") Long userId);
 }

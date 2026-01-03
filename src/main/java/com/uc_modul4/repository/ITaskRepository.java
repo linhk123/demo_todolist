@@ -20,4 +20,5 @@ public interface ITaskRepository extends JpaRepository<Task, Long> {
 
     // Tìm các task sắp đến hạn nhưng chưa xong
     List<Task> findByDueDateBeforeAndStatusNot(LocalDate date, Task.TaskStatus status);
+
 }

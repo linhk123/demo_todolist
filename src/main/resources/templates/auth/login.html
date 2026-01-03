@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Đăng nhập - TaskFlow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>body { font-family: 'Lexend', sans-serif; }</style>
 </head>
-<body>
-$END$
+<body class="bg-[#F4F7FF] min-h-screen flex items-center justify-center p-4">
+<div class="bg-white w-full max-w-[450px] p-10 rounded-[40px] shadow-[0_20px_50px_rgba(79,70,229,0.1)]">
+  <div class="text-center mb-8">
+    <div class="inline-flex w-16 h-16 bg-indigo-600 rounded-2xl items-center justify-center text-white mb-4 shadow-lg shadow-indigo-200">
+      <i class="fas fa-rocket text-2xl"></i>
+    </div>
+    <h2 class="text-3xl font-extrabold text-gray-900">Chào mừng trở lại!</h2>
+    <p class="text-gray-400 mt-2">Quản lý công việc hiệu quả hơn mỗi ngày</p>
+  </div>
+
+  <form th:action="@{/login}" method="post" class="space-y-5">
+
+    <div th:if="${param.error}" class="p-3 bg-red-100 text-red-600 rounded-xl text-sm italic mb-4">
+      Tên đăng nhập hoặc mật khẩu không chính xác!
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold text-gray-700 mb-2 ml-1">Tên đăng nhập</label>
+      <div class="relative">
+        <i class="fas fa-user absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        <input type="text" name="username" required
+               class="w-full pl-12 pr-6 py-4 bg-gray-50 border-2 border-transparent focus:border-indigo-500 focus:bg-white rounded-2xl outline-none transition-all"
+               placeholder="username_cua_ban">
+      </div>
+    </div>
+
+    <div>
+      <div class="flex justify-between mb-2 ml-1">
+        <label class="text-sm font-semibold text-gray-700">Mật khẩu</label>
+      </div>
+      <div class="relative">
+        <i class="fas fa-lock absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        <input type="password" name="password" required
+               class="w-full pl-12 pr-6 py-4 bg-gray-50 border-2 border-transparent focus:border-indigo-500 focus:bg-white rounded-2xl outline-none transition-all"
+               placeholder="••••••••">
+      </div>
+    </div>
+
+    <button type="submit"
+            class="w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all transform active:scale-95">
+      Đăng nhập ngay
+    </button>
+  </form>
+
+  <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+    <p class="text-gray-500 text-sm">
+      Bạn mới sử dụng TaskFlow? <a href="/register" class="text-indigo-600 font-bold hover:underline">Đăng ký tài khoản</a>
+    </p>
+  </div>
+</div>
+
 </body>
 </html>
